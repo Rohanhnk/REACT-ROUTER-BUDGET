@@ -17,7 +17,7 @@ const Intro = () => {
             type="text"
             name="userName"
             required
-            placeholder="What is you name?"
+            placeholder="What is your name?"
             aria-label="Your Name"
             autoComplete="given-name"
           />
@@ -28,7 +28,7 @@ const Intro = () => {
           </button>
         </Form>
       </div>
-      <img src="{illustration}" alt="Person with money" width={600} />
+      <img src={illustration} alt="Person with money" width={600} />
     </div>
   );
 };
