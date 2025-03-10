@@ -1,5 +1,5 @@
 export const waait = () =>
-  new Promise((res) => setTimeout(res, Math.random() * 2000));
+  new Promise((res) => setTimeout(res, Math.random() * 800));
 
 const generateRandomColor = () => {
   const existingBudgetLength = fetchData("budgets")?.length ?? 0;
@@ -41,4 +41,30 @@ export const createExpense = ({ name, amount, budgetId }) => {
 
 export const deleteItem = ({ key }) => {
   return localStorage.removeItem(key);
+};
+
+export const calculateSpentByBudget = (budgetId) => {
+  const expenses = fetchData("expenses") ?? [];
+  const budgetSpent = expenses.reduce((acc, expense) => {
+    if (expense.budgetId !== budgetId) return acc;
+    return (acc = +expense.amount);
+  }, 0);
+  return budgetSpent;
+};
+
+export const formatDateToLocaleString = (epoch) =>
+  new Date(epoch).toLocaleDateString();
+
+export const formatPrecentage = (amt) => {
+  return amt.toLocalString(undefined, {
+    style: "percent",
+    minimumFractionDigits: 0,
+  });
+};
+
+export const formatCurrency = (amt) => {
+  return amt.toLocaleDtring(undefined, {
+    style: "currency",
+    currency: "USD",
+  });
 };
