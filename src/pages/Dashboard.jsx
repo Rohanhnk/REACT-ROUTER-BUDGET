@@ -44,14 +44,18 @@ export async function dashboardAction({ request }) {
     }
   }
 
-  if (_action === "createExpense") {
+  if (_action === "deleteExpense") {
     try {
+      deleteItem({
+        key: "expenses",
+        id: values.expenseId,
+      });
       createExpense({
         name: values.newExpense,
         amount: values.newExpenseAmount,
         budgetId: values.newExpenseBudget,
       });
-      return toast.success(`Expense ${values.newExpense} created!`);
+      return toast.success("Expense deleted!");
     } catch (e) {
       throw new Error("There was a problem creating your expense.");
     }
@@ -85,10 +89,15 @@ const Dashboard = () => {
                   <div className="grid-md">
                     <h2>Recent Expenses</h2>
                     <Table
-                      expenses={expenses.sort(
-                        (a, b) => b.createdAt - a.createdAt
-                      )}
+                      expenses={expenses
+                        .sort((a, b) => b.createdAt - a.createdAt)
+                        .slice(0, 8)}
                     />
+                    {expenses.length > 8 && (
+                      <Link to="expenses" className="btn btn--dark">
+                        View all expenses
+                      </Link>
+                    )}
                   </div>
                 )}
               </div>
