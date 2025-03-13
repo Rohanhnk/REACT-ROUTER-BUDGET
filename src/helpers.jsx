@@ -52,10 +52,6 @@ export const createExpense = ({ name, amount, budgetId }) => {
   );
 };
 
-export const deleteItem = ({ key }) => {
-  return localStorage.removeItem(key);
-};
-
 export const calculateSpentByBudget = (budgetId) => {
   const expenses = fetchData("expenses") ?? [];
   const budgetSpent = expenses.reduce((acc, expense) => {

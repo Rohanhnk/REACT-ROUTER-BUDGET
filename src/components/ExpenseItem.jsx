@@ -5,7 +5,7 @@ import {
   getAllMatchingItems,
 } from "../helpers";
 import { TrashIcon } from "@heroicons/react/24/solid";
-const ExpenseItem = ({ expense }) => {
+const ExpenseItem = ({ expense, showBudget }) => {
   const fetcher = useFetcher();
   const budget = getAllMatchingItems({
     category: "budgets",
@@ -19,11 +19,16 @@ const ExpenseItem = ({ expense }) => {
       <td>{formatCurrency(expense.amount)}</td>
       <td>{formatDateToLocaleString(expense.createdAt)}</td>
       <td>{formatDateToLocaleString(expense.createdAt)}</td>
-      <td>
-        <Link to={`/budget/${budget.id}`} style={{ "--accent": budget.color }}>
-          {budget.name}
-        </Link>
-      </td>
+      {showBudget && (
+        <td>
+          <Link
+            to={`/budget/${budget.id}`}
+            style={{ "--accent": budget.color }}
+          >
+            {budget.name}
+          </Link>
+        </td>
+      )}
       <td>
         <fetcher.Form method="psot">
           <input type="hidden" name="_action" value="deleteExpense" />
