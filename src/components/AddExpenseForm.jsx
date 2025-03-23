@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 import { useEffect, useRef } from "react";
 
 import { useFetcher } from "react-router-dom";

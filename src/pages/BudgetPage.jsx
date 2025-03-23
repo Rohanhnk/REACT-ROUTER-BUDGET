@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
+
 import { useLoaderData } from "react-router-dom";
 import { createExpense, deleteItem, getAllMatchingItems } from "../helpers";
 import AddExpenseForm from "../components/AddExpenseForm";
-import BudgetItem from "../components/Bugetitem";
+import BudgetItem from "../components/BudgetItem";
 import Table from "../components/Table";
 import { toast } from "react-toastify";
 
@@ -37,7 +39,7 @@ export async function budgetAction({ request }) {
         budgetId: values.newExpenseBudget,
       });
       return toast.success(`Expense ${values.newExpense} created!`);
-    } catch (e) {
+    } catch {
       throw new Error("There was a problem creating your budget.");
     }
   }
@@ -49,7 +51,7 @@ export async function budgetAction({ request }) {
         id: values.expenseId,
       });
       return toast.success("Expense deleted!");
-    } catch (e) {
+    } catch {
       throw new Error("There was a problem creating your expense.");
     }
   }
@@ -68,7 +70,7 @@ const BudgetPage = () => {
         Overview
       </h1>
       <div className="flex-lg">
-        <BudgetItem budget={budget} />
+        <BudgetItem budget={budget} showDelete={true} />
         <AddExpenseForm budgets={[budget]} />
       </div>
       {expenses && expenses.length > 0 && (

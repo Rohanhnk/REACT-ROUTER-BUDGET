@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 import ExpenseItem from "./ExpenseItem";
 
 const Table = ({ expenses, showBudget = true }) => {

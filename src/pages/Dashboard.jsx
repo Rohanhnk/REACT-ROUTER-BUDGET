@@ -1,14 +1,20 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 import { toast } from "react-toastify";
 
 import Intro from "../components/Intro";
 import AddBudgetForm from "../components/AddBudgetForm";
 import AddExpenseForm from "../components/AddExpenseForm";
-
-import { createBudget, createExpense, fetchData, waait } from "../helpers";
-import BudgetItem from "../components/Bugetitem";
+import BudgetItem from "../components/BudgetItem";
 import Table from "../components/Table";
+
+import {
+  createBudget,
+  createExpense,
+  deleteItem,
+  fetchData,
+  waait,
+} from "../helpers";
 
 export function dashboardLoader() {
   const userName = fetchData("userName");
@@ -27,8 +33,20 @@ export async function dashboardAction({ request }) {
     try {
       localStorage.setItem("userName", JSON.stringify(values.userName));
       return toast.success(`Welcome, ${values.userName}`);
-    } catch (e) {
+    } catch {
       throw new Error("There was a problem creating your account.");
+    }
+  }
+
+  if (_action === "createBudget") {
+    try {
+      createBudget({
+        name: values.newBudget,
+        amount: values.newBudgetAmount,
+      });
+      return toast.success("Budget created!");
+    } catch {
+      throw new Error("There was a problem creating your budget.");
     }
   }
 
@@ -40,8 +58,8 @@ export async function dashboardAction({ request }) {
         budgetId: values.newExpenseBudget,
       });
       return toast.success(`Expense ${values.newExpense} created!`);
-    } catch (e) {
-      throw new Error("There was a problem creating your budget.");
+    } catch {
+      throw new Error("There was a problem creating your expense.");
     }
   }
 
@@ -51,14 +69,9 @@ export async function dashboardAction({ request }) {
         key: "expenses",
         id: values.expenseId,
       });
-      createExpense({
-        name: values.newExpense,
-        amount: values.newExpenseAmount,
-        budgetId: values.newExpenseBudget,
-      });
       return toast.success("Expense deleted!");
-    } catch (e) {
-      throw new Error("There was a problem creating your expense.");
+    } catch {
+      throw new Error("There was a problem deleting your expense.");
     }
   }
 }

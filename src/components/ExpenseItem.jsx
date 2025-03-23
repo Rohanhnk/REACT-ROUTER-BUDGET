@@ -1,4 +1,6 @@
-import { useFetcher } from "react-router-dom";
+/* eslint-disable react/prop-types */
+
+import { Link, useFetcher } from "react-router-dom";
 import {
   formatCurrency,
   formatDateToLocaleString,
