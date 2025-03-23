@@ -1,30 +1,36 @@
 /* eslint-disable react/prop-types */
 
 import { Form, Link } from "react-router-dom";
+
+import { BanknotesIcon, TrashIcon } from "@heroicons/react/24/outline";
+
 import {
   calculateSpentByBudget,
   formatCurrency,
-  formatPrecentage,
+  formatPercentage,
 } from "../helpers";
-import { BanknotesIcon } from "@heroicons/react/24outline";
-import { TrashIcon } from "@heroicons/react/24/solid";
 
-const BudgetItem = ({ budget, showDelete }) => {
+const BudgetItem = ({ budget, showDelete = false }) => {
   const { id, name, amount, color } = budget;
   const spent = calculateSpentByBudget(id);
 
   return (
-    <div className="budget" style={{ "--accent": color }}>
+    <div
+      className="budget"
+      style={{
+        "--accent": color,
+      }}
+    >
       <div className="progress-text">
         <h3>{name}</h3>
-        <p>{formatCurrency(amount)} Budgetes</p>
+        <p>{formatCurrency(amount)} Budgeted</p>
       </div>
       <progress max={amount} value={spent}>
-        {formatPrecentage(spent / amount)}
+        {formatPercentage(spent / amount)}
       </progress>
       <div className="progress-text">
         <small>{formatCurrency(spent)} spent</small>
-        <small>{formatCurrency(amount - spent)}remaining</small>
+        <small>{formatCurrency(amount - spent)} remaining</small>
       </div>
       {showDelete ? (
         <div className="flex-sm">
@@ -34,7 +40,7 @@ const BudgetItem = ({ budget, showDelete }) => {
             onSubmit={(event) => {
               if (
                 !confirm(
-                  "Are you sure you want to delte permanently delete this budget?"
+                  "Are you sure you want to permanently delete this budget?"
                 )
               ) {
                 event.preventDefault();

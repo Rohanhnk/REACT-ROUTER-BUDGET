@@ -3,7 +3,7 @@ import { Link, useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import Intro from "../components/Intro";
-import AddBudgetForm from "../components/AddBudgetForm";
+import AddBudgetForm from "../components/AddBudgetsForm";
 import AddExpenseForm from "../components/AddExpenseForm";
 import BudgetItem from "../components/BudgetItem";
 import Table from "../components/Table";
