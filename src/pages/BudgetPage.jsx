@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable react-refresh/only-export-components */
 
 import { useLoaderData } from "react-router-dom";
 import { createExpense, deleteItem, getAllMatchingItems } from "../helpers";
@@ -21,7 +21,7 @@ export async function budgetLoader({ params }) {
   });
 
   if (!budget) {
-    throw new Error("The budget you're trying t ofind doesn't exist");
+    throw new Error("The budget you're trying to find doesn't exist");
   }
 
   return { budget, expenses };

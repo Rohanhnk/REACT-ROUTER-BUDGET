@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+
 import { useLoaderData } from "react-router-dom";
 
 import { deleteItem, fetchData } from "../helpers";

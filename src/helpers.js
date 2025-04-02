@@ -24,12 +24,13 @@ export const deleteItem = ({ key, id }) => {
   return localStorage.removeItem(key);
 };
 
-export const createBudget = ({ name, amount }) => {
+export const createBudget = ({ name, amount, currency }) => {
   const newItem = {
     id: crypto.randomUUID(),
     name: name,
     createdAt: Date.now(),
     amount: +amount,
+    currency: currency,
     color: generateRandomColor(),
   };
   const existingBudgets = fetchData("budgets") ?? [];
@@ -74,9 +75,9 @@ export const formatPercentage = (amt) => {
   });
 };
 
-export const formatCurrency = (amt) => {
+export const formatCurrency = (amt, currency = "USD") => {
   return amt.toLocaleString(undefined, {
     style: "currency",
-    currency: "USD",
+    currency: currency,
   });
 };

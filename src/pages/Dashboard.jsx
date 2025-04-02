@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+
 import { Link, useLoaderData } from "react-router-dom";
 
 import { toast } from "react-toastify";
