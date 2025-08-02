@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 
 import { useRef, useEffect } from "react";
-import { CurrencyDollarIcon } from "@heroicons/react/24/solid";
 import { useFetcher } from "react-router-dom";
-import { createBudget } from "../helpers";
+// import { createBudget } from "../helpers";
 
-const AddBudgetForm = ({ onBudgetCreated }) => {
+const AddBudgetForm = () => {
   const fetcher = useFetcher();
   const isSubmitting = fetcher.state === "submitting";
 
@@ -19,29 +18,10 @@ const AddBudgetForm = ({ onBudgetCreated }) => {
     }
   }, [isSubmitting]);
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const name = formData.get("newBudget");
-    const amount = formData.get("newBudgetAmount");
-    const currency = formData.get("currency");
-
-    createBudget({ name, amount, currency });
-
-    if (onBudgetCreated) {
-      onBudgetCreated();
-    }
-  };
-
   return (
     <div className="form-wrapper">
-      <h2 className="h3">Create Budget</h2>
-      <fetcher.Form
-        method="post"
-        className="grid-sm"
-        ref={formRef}
-        onSubmit={handleFormSubmit} // Attach the handler here
-      >
+      <h2 className="h3">Create budget</h2>
+      <fetcher.Form method="post" className="grid-sm" ref={formRef}>
         <div className="grid-xs">
           <label htmlFor="newBudget">Budget Name</label>
           <input
@@ -83,7 +63,6 @@ const AddBudgetForm = ({ onBudgetCreated }) => {
           ) : (
             <>
               <span>Create Budget</span>
-              <CurrencyDollarIcon width={20} />
             </>
           )}
         </button>

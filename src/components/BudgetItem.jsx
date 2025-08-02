@@ -21,14 +21,16 @@ const BudgetItem = ({ budget, showDelete = false }) => {
     >
       <div className="progress-text">
         <h3>{name}</h3>
-        <p>{formatCurrency(amount, currency)}</p>
+        <p>{formatCurrency(amount, currency ?? "USD")}</p>
       </div>
       <progress max={amount} value={spent}>
         {formatPercentage(spent / amount)}
       </progress>
       <div className="progress-text">
-        <small>{formatCurrency(spent, currency)} spent</small>
-        <small>{formatCurrency(amount - spent, currency)} remaining</small>
+        <small>{formatCurrency(spent, currency ?? "USD")} spent</small>
+        <small>
+          {formatCurrency(amount - spent, currency ?? "USD")} remaining
+        </small>
       </div>
       {showDelete ? (
         <div className="flex-sm">

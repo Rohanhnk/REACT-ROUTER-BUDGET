@@ -76,6 +76,7 @@ export const formatPercentage = (amt) => {
 };
 
 export const formatCurrency = (amt, currency = "USD") => {
+  console.log(amt, currency);
   return amt.toLocaleString(undefined, {
     style: "currency",
     currency: currency,
